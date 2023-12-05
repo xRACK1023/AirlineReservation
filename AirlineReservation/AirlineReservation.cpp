@@ -18,26 +18,42 @@ void displaySeats(int takenSEAT[]) {
 
 int main() {
 
-	int totalSeats[SEATS], seatNUM;
+	int totalSeats[SEATS], seatNUM, planeFULL;
 
 	for (int j = 0; j < SEATS; j++) {
 		totalSeats[j] = 0;
 	}
-	displaySeats(totalSeats);
+
 	do {
+		displaySeats(totalSeats);
+
 		printf("Which seat would you like to book?: ");
-		scanf("%d", &seatNUM);
+		scanf("%i", &seatNUM);
 
-		if (totalSeats[seatNUM] == 1) {
-			printf("Seat %d is already reserved. Please choose another seat.\n", &seatNUM);
+		if (totalSeats[seatNUM-1] == 1) {
+			printf("Seat %d is already reserved. Please choose another seat.\n\n", seatNUM);
 		}
-		else
-			printf("Seat %d booked!\n", &seatNUM);
-			totalSeats[seatNUM] = 1;
+		else {
+			printf("Seat %d booked!\n\n", seatNUM);
+			totalSeats[seatNUM-1] = 1;
 
-	}
-	while
+		}
+		for (int x = 0; x < SEATS; x++) {
+			int cheakSeats = totalSeats[x];
+			if (cheakSeats == 0) {
+				planeFULL = 0;
+				break;
+			}
+			else {
+				planeFULL = 1;
+			}
+		
+		}
 
-
+	} while (!planeFULL);
+		displaySeats(totalSeats);
+		printf("All seats are reserved. Plane is taking off!\n");
+		
+		
 	return 0;
 }
